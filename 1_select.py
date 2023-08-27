@@ -2,7 +2,7 @@ import socket
 from select import select
 
 
-# Список, содержащий файловые объекты (сокеты) для мониторинга
+# Список, содержащий файловые объекты (сокеты) для мониторинга.
 to_monitor = []
 
 
@@ -16,7 +16,7 @@ def accept_connection(server_socket):
     client_socket, addr = server_socket.accept()
     print(f"Connection from: {addr}")
 
-    # Добавление клиентского сокета в очередь для мониторинга
+    # Добавление клиентского сокета в очередь для мониторинга.
     to_monitor.append(client_socket)
 
 
@@ -42,18 +42,18 @@ def event_loop():
         # Возвращает те же самые объекты после того, как они станут доступны.
         ready_to_read, _, _ = select(to_monitor, [], [])  # read, write, errors
 
-        # Проходимся по всем сокетам, готовым для чтения
+        # Проходимся по всем сокетам, готовым для чтения.
         for socket in ready_to_read:
-            # Если сокет серверный, то ждём соединения
+            # Если сокет серверный, то ждём соединения.
             if socket is server_socket:
                 accept_connection(socket)
-            # Если сокет клиентский, то отправляем ответ
+            # Если сокет клиентский, то отправляем ответ.
             else:
                 send_message(socket)
 
 
 if __name__ == "__main__":
-    # Добавление серверного сокета в очередь для мониторинга
+    # Добавление серверного сокета в очередь для мониторинга.
     to_monitor.append(server_socket)
-    # Запуск событийного цикла
+    # Запуск событийного цикла.
     event_loop()
