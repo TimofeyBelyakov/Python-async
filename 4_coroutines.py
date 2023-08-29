@@ -28,6 +28,7 @@ gen = sub_gen()
 # Чтобы генератору передать аргумент, его сначала нужно проинициализировать - gen.send(None).
 # Вместо gen.send(None) можно использовать next(gen).
 print(gen.send(None))
+# После вывода сообщения генератор выбрасывает исключение StopIteration.
 try:
     gen.send("Hello world!")
 except StopIteration:

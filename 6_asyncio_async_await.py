@@ -30,7 +30,7 @@ async def print_time():
 
 async def main():
     # Оборачиваем корутины в экземпляры класса Task.
-    # Передавать нужно не функцию генератора, а объект.
+    # Передавать нужно не ссылку на генератор, а объект.
     task1 = asyncio.ensure_future(print_nums())  # Синтаксис версии python < 3.6.
     task2 = asyncio.create_task(print_time())  # Синтаксис версии python >= 3.6.
 
