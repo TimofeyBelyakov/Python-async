@@ -1,3 +1,6 @@
+from inspect import getgeneratorstate
+
+
 # Декоратор, инициализирующий генератор.
 def coroutine_init(func):
     def wrapper(*args, **kwargs):
@@ -25,14 +28,17 @@ def sub_gen():
 
 print("Generator sub_gen():")
 gen = sub_gen()
+print(f"Generator state: {getgeneratorstate(gen)}")
 # Чтобы генератору передать аргумент, его сначала нужно проинициализировать - gen.send(None).
 # Вместо gen.send(None) можно использовать next(gen).
 print(gen.send(None))
+print(f"Generator state: {getgeneratorstate(gen)}")
 # После вывода сообщения генератор выбрасывает исключение StopIteration.
 try:
     gen.send("Hello world!")
 except StopIteration:
     print("StopIteration")
+print(f"Generator state: {getgeneratorstate(gen)}")
 print()
 
 
